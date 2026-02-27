@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="images/imagen.ico">
+  <title>YaMismo - Delivery</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --primary: #ff5722;
+      --primary-light: #ff9800;
+      --primary-pale: #fff3e0;
+      --dark: #1a1a1a;
+      --mid: #555;
+      --gray: #888;
+      --light-bg: #fafafa;
+      --white: #ffffff;
+      --radius: 16px;
+      --radius-sm: 8px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: var(--white);
+      color: var(--dark);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ─── NAV ─────────────────────────────────────────── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+      padding: 0 24px;
+    }
+
+    .nav-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--primary);
+      text-decoration: none;
+      letter-spacing: -0.5px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--mid);
+      font-size: 0.9rem;
+      font-weight: 500;
+      padding: 6px 14px;
+      border-radius: 50px;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .nav-links a:hover { background: var(--primary-pale); color: var(--primary); }
+
+    .btn-nav {
+      background: var(--primary);
+      color: var(--white) !important;
+      font-weight: 700 !important;
+      border-radius: 50px !important;
+      padding: 8px 20px !important;
+      transition: opacity 0.2s !important;
+    }
+    .btn-nav:hover { opacity: 0.88; background: var(--primary) !important; }
+
+    /* Hamburger */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 4px;
+    }
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--dark);
+      border-radius: 2px;
+      transition: all 0.3s;
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* Mobile drawer */
+    .mobile-menu {
+      display: none;
+      flex-direction: column;
+      padding: 16px 24px 20px;
+      background: var(--white);
+      border-top: 1px solid rgba(0,0,0,0.06);
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      text-decoration: none;
+      color: var(--dark);
+      font-weight: 500;
+      padding: 12px 0;
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+      font-size: 1rem;
+    }
+    .mobile-menu a:last-child { border-bottom: none; }
+    .mobile-menu .btn-mobile {
+      margin-top: 12px;
+      background: var(--primary);
+      color: var(--white);
+      text-align: center;
+      border-radius: 50px;
+      padding: 12px;
+      font-weight: 700;
+      border-bottom: none;
+    }
+
+    /* ─── HERO ─────────────────────────────────────────── */
+    .hero {
+      background: linear-gradient(135deg, #ff5722 0%, #ff9800 100%);
+      padding: 80px 24px 100px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* subtle decorative circles */
+    .hero::before, .hero::after {
+      content: '';
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.07);
+    }
+    .hero::before { width: 400px; height: 400px; top: -100px; left: -100px; }
+    .hero::after  { width: 300px; height: 300px; bottom: -80px; right: -60px; }
+
+    .hero-content { max-width: 680px; margin: 0 auto; position: relative; z-index: 1; }
+
+    .hero-badge {
+      display: inline-block;
+      background: rgba(255,255,255,0.18);
+      color: #fff;
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 4px 14px;
+      border-radius: 50px;
+      margin-bottom: 20px;
+      letter-spacing: 0.5px;
+    }
+
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 800;
+      color: #fff;
+      line-height: 1.2;
+      margin-bottom: 16px;
+      letter-spacing: -1px;
+    }
+
+    .hero p {
+      font-size: 1.1rem;
+      color: rgba(255,255,255,0.88);
+      margin-bottom: 36px;
+    }
+
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #fff;
+      color: var(--primary);
+      font-weight: 700;
+      font-size: 1rem;
+      padding: 14px 32px;
+      border-radius: 50px;
+      text-decoration: none;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .hero-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(0,0,0,0.2); }
+
+    .hero-img {
+      background: transparent; 
+      margin-top: 56px;
+    }
+    .hero-img img {
+      background: transparent;
+      max-width: 200px;
+      width: 100%;
+      border-radius: 24px;
+    }
+
+    /* ─── FEATURES ─────────────────────────────────────── */
+    .features {
+      padding: 80px 24px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      color: var(--primary);
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .section-title {
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      color: var(--dark);
+      margin-bottom: 48px;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .feature-card {
+      background: var(--light-bg);
+      border-radius: var(--radius);
+      padding: 32px 28px;
+      border: 1px solid rgba(0,0,0,0.05);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .feature-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(255,87,34,0.1); }
+
+    .feature-icon {
+      width: 52px;
+      height: 52px;
+      background: var(--primary-pale);
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      margin-bottom: 20px;
+    }
+
+    .feature-card h5 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: var(--dark);
+    }
+
+    .feature-card p {
+      font-size: 0.92rem;
+      color: var(--mid);
+      line-height: 1.65;
+    }
+
+    /* ─── CÓMO FUNCIONA ────────────────────────────────── */
+    .how {
+      background: var(--light-bg);
+      padding: 80px 24px;
+    }
+
+    .how-inner {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+      position: relative;
+    }
+
+    /* connecting line */
+    .steps::before {
+      content: '';
+      position: absolute;
+      top: 30px;
+      left: calc(50% / 3 + 16px);
+      right: calc(50% / 3 + 16px);
+      height: 2px;
+      background: linear-gradient(90deg, var(--primary), var(--primary-light));
+      z-index: 0;
+    }
+
+    .step {
+      text-align: center;
+      padding: 0 16px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .step-num {
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(135deg, var(--primary), var(--primary-light));
+      color: #fff;
+      font-weight: 800;
+      font-size: 1.3rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+      box-shadow: 0 4px 16px rgba(255,87,34,0.35);
+    }
+
+    .step h5 {
+      font-size: 0.95rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .step p {
+      font-size: 0.88rem;
+      color: var(--mid);
+    }
+
+    /* ─── CONTACTO ─────────────────────────────────────── */
+    .contact {
+      padding: 80px 24px;
+      text-align: center;
+    }
+
+    .contact-box {
+      max-width: 540px;
+      margin: 0 auto;
+      background: linear-gradient(135deg, #ff5722, #ff9800);
+      border-radius: 24px;
+      padding: 56px 40px;
+      color: #fff;
+      box-shadow: 0 16px 48px rgba(255,87,34,0.25);
+    }
+
+    .contact-box h2 {
+      font-size: 1.8rem;
+      font-weight: 800;
+      margin-bottom: 12px;
+      letter-spacing: -0.5px;
+    }
+
+    .contact-box p {
+      color: rgba(255,255,255,0.85);
+      margin-bottom: 28px;
+    }
+
+    .contact-btn {
+      display: inline-block;
+      background: #fff;
+      color: var(--primary);
+      font-weight: 700;
+      padding: 12px 28px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-size: 0.95rem;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .contact-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.15); }
+
+    /* ─── FOOTER ───────────────────────────────────────── */
+    footer {
+      background: var(--dark);
+      color: #888;
+      text-align: center;
+      padding: 32px 24px;
+      font-size: 0.85rem;
+    }
+    footer a { color: var(--primary-light); text-decoration: none; }
+    footer a:hover { color: #fff; }
+    .footer-links { margin-top: 8px; }
+    .footer-links a { margin: 0 8px; }
+
+    /* ─── CAROUSEL ─────────────────────────────────────── */
+    .screenshots {
+      padding: 80px 24px;
+      background: var(--light-bg);
+      text-align: center;
+    }
+
+    .screenshots .section-label,
+    .screenshots .section-title {
+      text-align: center;
+    }
+
+    .carousel-wrapper {
+      position: relative;
+      max-width: 1500px;
+      margin: 0 auto;
+      overflow: hidden;
+    }
+
+    .carousel-track {
+      display: flex;
+      transition: transform 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      will-change: transform;
+    }
+
+    .carousel-slide {
+      min-width: calc(100% / 3);
+      padding: 0 6px;
+      flex-shrink: 0;
+    }
+
+    .carousel-slide img {
+      width: 100%;
+      max-width: 350px;
+      border-radius: var(--radius);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+      display: block;
+      margin: 0 auto;
+      aspect-ratio: 9/19;
+      object-fit: cover;
+      transition: transform 0.2s;
+    }
+
+    .carousel-slide img:hover {
+      transform: scale(1.02);
+    }
+
+    /* Arrows */
+    .carousel-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: none;
+      background: var(--gray);
+      cursor: pointer;
+      font-size: 1.1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 40;
+      transition: background 0.2s, transform 0.2s;
+      color: #fff;
+    }
+
+    .carousel-btn:hover {
+      background: var(--primary);
+      color: #fff;
+      transform: translateY(-50%) scale(1.05);
+    }
+
+    .carousel-btn.prev { left: 2px; }
+    .carousel-btn.next { right: 2px; }
+
+    /* Dots */
+    .carousel-dots {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 28px;
+    }
+
+    .carousel-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #ddd;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      transition: background 0.2s, transform 0.2s;
+    }
+
+    .carousel-dot.active {
+      background: var(--primary);
+      transform: scale(1.3);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .carousel-slide { min-width: 100%; padding: 0 12px; }
+      .carousel-wrapper { max-width: 400px; margin: 0 auto; }
+      .carousel-btn { display: none; }
+      .carousel-slide img { max-width: 200px; }
+      .carousel-slide img:hover { transform: none; }
+    }
+
+    @media (min-width: 769px) and (max-width: 1024px) {
+      .carousel-slide { min-width: calc(100% / 2); }
+      .carousel-wrapper { max-width: 240px; }
+    }
+
+    /* ─── RESPONSIVE ────────────────────────────────────── */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+
+      .features-grid { grid-template-columns: 1fr; }
+
+      .steps { grid-template-columns: 1fr; gap: 32px; }
+      .steps::before { display: none; }
+
+      .contact-box { padding: 40px 24px; }
+
+      .hero { padding: 60px 24px 80px; }
+      .hero-img img {
+        max-width: 140px;
+      }
+    }
+
+    @media (min-width: 769px) and (max-width: 1024px) {
+      .features-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-inner">
+      <a class="logo" href="#">YaMismo</a>
+      <ul class="nav-links">
+        <li><a href="#inicio">Inicio</a></li>
+        <li><a href="#funciona">Cómo funciona</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+        <li><a href="https://github.com/FrayPalomino/yamismo-apk/releases/download/v1.0.0/application-033a47d7-169f-412f-8c5a-eaf6b2aacea7.1.apk" class="btn-nav">Descargar App</a></li>
+      </ul>
+      <button class="hamburger" id="hamburger" aria-label="Menú">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="#inicio" class="mobile-link">Inicio</a>
+      <a href="#funciona" class="mobile-link">Cómo funciona</a>
+      <a href="#contacto" class="mobile-link">Contacto</a>
+      <a href="https://github.com/FrayPalomino/yamismo-apk/releases/download/v1.0.0/application-033a47d7-169f-412f-8c5a-eaf6b2aacea7.1.apk" class="btn-mobile">⬇ Descargar APK</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section id="inicio" class="hero">
+    <div class="hero-content">
+      <span class="hero-badge">📱 Disponible para Android</span>
+      <h1>Pide tu comida favorita, llegará YaMismo</h1>
+      <p>Delivery rápido, confiable y sin complicaciones directo a tu puerta.</p>
+      <a href="https://github.com/FrayPalomino/yamismo-apk/releases/download/v1.0.0/application-033a47d7-169f-412f-8c5a-eaf6b2aacea7.1.apk" class="hero-cta">
+        ⬇ Descargar APK gratis
+      </a>
+      <div class="hero-img">
+        <img src="images/logo.png" alt="App YaMismo">
+      </div>
+    </div>
+  </section>
+
+  <!-- SCREENSHOTS CAROUSEL -->
+  <section class="screenshots" id="capturas">
+    <p class="section-label">Capturas</p>
+    <h2 class="section-title">Mira la app en acción</h2>
+    <div class="carousel-wrapper">
+      <button class="carousel-btn prev" id="prevBtn" aria-label="Anterior">&#8249;</button>
+      <div class="carousel-track" id="carouselTrack">
+        <div class="carousel-slide"><img src="images/img1.jpeg" alt="Captura 1"></div>
+        <div class="carousel-slide"><img src="images/img2.jpeg" alt="Captura 2"></div>
+        <div class="carousel-slide"><img src="images/img3.jpeg" alt="Captura 3"></div>
+        <div class="carousel-slide"><img src="images/img4.jpeg" alt="Captura 4"></div>
+        <div class="carousel-slide"><img src="images/img5.jpeg" alt="Captura 5"></div>
+        <div class="carousel-slide"><img src="images/img6.jpeg" alt="Captura 6"></div>
+      </div>
+      <button class="carousel-btn next" id="nextBtn" aria-label="Siguiente">&#8250;</button>
+    </div>
+    <div class="carousel-dots" id="carouselDots"></div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="features" id="features">
+    <p class="section-label">Ventajas</p>
+    <h2 class="section-title">¿Por qué usar YaMismo?</h2>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">🚀</div>
+        <h5>Entrega rápida</h5>
+        <p>Recibe tus pedidos en minutos gracias a nuestros repartidores siempre cerca de ti.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🍱</div>
+        <h5>Gran variedad</h5>
+        <p>Elige entre cientos de restaurantes y tipos de comida, todo en un solo lugar.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📍</div>
+        <h5>Seguimiento en tiempo real</h5>
+        <p>Observa el recorrido de tu pedido desde la cocina hasta la puerta de tu casa.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CÓMO FUNCIONA -->
+  <section id="funciona" class="how">
+    <div class="how-inner">
+      <p class="section-label" style="text-align:center">Proceso</p>
+      <h2 class="section-title" style="text-align:center">¿Cómo funciona?</h2>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <h5>Descarga la app</h5>
+          <p>Instala YaMismo y crea tu cuenta en segundos.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <h5>Elige tu comida</h5>
+          <p>Explora el menú y envía tu pedido con un toque.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <h5>Recíbelo en casa</h5>
+          <p>Tu pedido llega directo a tu puerta, ¡YaMismo!</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACTO -->
+  <section id="contacto" class="contact">
+    <div class="contact-box">
+      <h2>¿Tienes preguntas?</h2>
+      <p>Estamos aquí para ayudarte. Escríbenos y te responderemos pronto.</p>
+      <a href="/cdn-cgi/l/email-protection#5c33332c2f38392a393033313932281c3b313d3530723f3331" class="contact-btn">✉ Enviar mensaje</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2026 YaMismo · Todos los derechos reservados</p>
+    <div class="footer-links">
+      <a href="#">Política de privacidad</a>
+      <a href="#">Términos de uso</a>
+    </div>
+  </footer>
+
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    const btn = document.getElementById('hamburger');
+    const menu = document.getElementById('mobileMenu');
+
+    btn.addEventListener('click', () => {
+      btn.classList.toggle('open');
+      menu.classList.toggle('open');
+    });
+
+    // Close menu on link click
+    document.querySelectorAll('.mobile-link, .btn-mobile').forEach(link => {
+      link.addEventListener('click', () => {
+      btn.classList.remove('open');
+      menu.classList.remove('open');
+    });
+  });
+  </script>
+
+  <script>
+    // ── Carousel ──────────────────────────────────────────
+    (() => {
+      const track   = document.getElementById('carouselTrack');
+      const slides  = track.querySelectorAll('.carousel-slide');
+      const dotsEl  = document.getElementById('carouselDots');
+      const prevBtn = document.getElementById('prevBtn');
+      const nextBtn = document.getElementById('nextBtn');
+
+      const total = slides.length;
+      let current = 0;
+
+      function visibleCount() {
+        if (window.innerWidth <= 768)  return 1;
+        if (window.innerWidth <= 1024) return 2;
+        return 3;
+      }
+
+      function buildDots() {
+        dotsEl.innerHTML = '';
+        const pages = Math.ceil(total / visibleCount());
+        for (let i = 0; i < pages; i++) {
+          const d = document.createElement('button');
+          d.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+          d.addEventListener('click', () => goTo(i * visibleCount()));
+          dotsEl.appendChild(d);
+        }
+      }
+
+      function updateDots() {
+        const vis = visibleCount();
+        const pageIdx = Math.floor(current / vis);
+        dotsEl.querySelectorAll('.carousel-dot').forEach((d, i) => {
+          d.classList.toggle('active', i === pageIdx);
+        });
+      }
+
+      function goTo(idx) {
+        const vis  = visibleCount();
+        const max  = total - vis;
+        current = Math.max(0, Math.min(idx, max));
+        const slideW = 100 / vis;
+        track.style.transform = `translateX(-${current * slideW}%)`;
+        updateDots();
+      }
+
+      prevBtn.addEventListener('click', () => goTo(current - visibleCount()));
+      nextBtn.addEventListener('click', () => goTo(current + visibleCount()));
+
+      let startX = 0;
+      track.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, { passive: true });
+      track.addEventListener('touchend',   e => {
+        const diff = startX - e.changedTouches[0].clientX;
+        if (Math.abs(diff) > 40) diff > 0 ? goTo(current + 1) : goTo(current - 1);
+      });
+
+      window.addEventListener('resize', () => { buildDots(); goTo(0); });
+
+      buildDots();
+    })();
+  </script>
+</body>
+</html>
