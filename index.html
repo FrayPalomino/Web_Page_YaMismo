@@ -543,6 +543,34 @@
     .footer-links { margin-top: 10px; }
     .footer-links a { margin: 0 10px; }
 
+    /* ─── PLAY STORE TRUST ─── */
+    .playstore-trust {
+      margin-top: 40px;
+      display: flex; flex-direction: column; align-items: center; gap: 12px;
+    }
+
+    .playstore-badge img {
+      height: 60px;
+      filter: drop-shadow(0 4px 20px rgba(255,107,43,0.3));
+      transition: transform 0.2s, filter 0.2s;
+    }
+
+    .playstore-badge:hover img {
+      transform: translateY(-3px);
+      filter: drop-shadow(0 8px 30px rgba(255,107,43,0.5));
+    }
+
+    .playstore-sub {
+      font-size: 0.75rem !important;
+      color: var(--muted) !important;
+      margin: 0 !important;
+      letter-spacing: 0.3px;
+    }
+
+    .cta-playstore {
+      gap: 10px;
+    }
+
     /* ─── ANIMATIONS ─── */
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(24px); }
@@ -591,7 +619,7 @@
         <li><a href="#inicio">Inicio</a></li>
         <li><a href="#funciona">Cómo funciona</a></li>
         <li><a href="#contacto">Contacto</a></li>
-        <li><a href="https://github.com/FrayPalomino/rappigo-apk/releases/latest/download/App.apk" class="btn-nav">⬇ Descargar App</a></li>
+        <li><a href="https://play.google.com/store/apps/details?id=com.davidabel2.RappiGo&pcampaignid=web_share" target="_blank" class="btn-nav">▶ Disponible en Play Store</a></li>
       </ul>
       <button class="hamburger" id="hamburger" aria-label="Menú">
         <span></span><span></span><span></span>
@@ -601,7 +629,7 @@
       <a href="#inicio" class="mobile-link">Inicio</a>
       <a href="#funciona" class="mobile-link">Cómo funciona</a>
       <a href="#contacto" class="mobile-link">Contacto</a>
-      <a href="https://github.com/FrayPalomino/rappigo-apk/releases/latest/download/App.apk" class="btn-mobile">⬇ Descargar APK</a>
+      <a href="https://play.google.com/store/apps/details?id=com.davidabel2.RappiGo&pcampaignid=web_share" target="_blank" class="btn-mobile">▶ Ver en Google Play</a>
     </div>
   </nav>
 
@@ -609,17 +637,24 @@
   <section id="inicio" class="hero">
     <div class="hero-grid"></div>
     <div class="hero-content">
-      <span class="hero-badge fade-up">Disponible para Android</span>
+      <span class="hero-badge fade-up">🎉 ¡Ya disponible en Google Play Store!</span>
       <h1 class="fade-up-2">Tu comida favorita,<br><em>en minutos</em></h1>
       <p class="fade-up-3">Delivery rápido, confiable y sin complicaciones directo a tu puerta.</p>
       <div class="hero-ctas fade-up-4">
-        <a href="https://github.com/FrayPalomino/rappigo-apk/releases/latest/download/App.apk" class="cta-primary">
-          ⬇ Descargar APK gratis
+        <a href="https://play.google.com/store/apps/details?id=com.davidabel2.RappiGo&pcampaignid=web_share" target="_blank" class="cta-primary cta-playstore">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M3.18 23.76c.3.17.64.24.99.2l.11-.04L13.63 14 10 10.37 3.18 23.76zm17.29-11.47-3.47-1.96-4.02 4.02 4.02 4.02 3.45-1.95a1.97 1.97 0 0 0 0-4.13zM2.1 1.05a2 2 0 0 0-.1.63v20.64c0 .22.04.43.1.63L13 13 2.1 1.05zm11.53 11.57L3.18.24c-.3-.17-.65-.24-1-.2l-.1.04L13 12l.63.62z"/></svg>
+          Descargar en Google Play
         </a>
         <a href="#funciona" class="cta-secondary">¿Cómo funciona? →</a>
       </div>
       <div class="hero-logo-wrap fade-up-4">
-        <img src="images/logo.png" alt="App RapiGo">
+        <img src="images/logo.png" alt="App RappiGo">
+      </div>
+      <div class="playstore-trust fade-up-4">
+        <a href="https://play.google.com/store/apps/details?id=com.davidabel2.RappiGo&pcampaignid=web_share" target="_blank" class="playstore-badge">
+          <img src="https://play.google.com/intl/en_us/badges/static/images/badges/es_badge_web_generic.png" alt="Disponible en Google Play" height="60">
+        </a>
+        <p class="playstore-sub">Descarga segura · Sin APKs externos · Actualizaciones automáticas</p>
       </div>
     </div>
   </section>
@@ -628,11 +663,11 @@
   <section class="stats">
     <div class="stats-inner">
       <div class="stat-item">
-        <div class="stat-number">30<span>+</span></div>
+        <div class="stat-number">20<span>+</span></div>
         <div class="stat-label">Restaurantes</div>
       </div>
       <div class="stat-item">
-        <div class="stat-number">20<span>min</span></div>
+        <div class="stat-number">30<span>min</span></div>
         <div class="stat-label">Tiempo promedio</div>
       </div>
     </div>
@@ -671,8 +706,8 @@
       <div class="steps">
         <div class="step">
           <div class="step-num">1</div>
-          <h5>Descarga la app</h5>
-          <p>Instala RapiGo y crea tu cuenta en segundos.</p>
+          <h5>Descarga en Play Store</h5>
+          <p>Instala RappiGo desde Google Play y crea tu cuenta en segundos.</p>
         </div>
         <div class="step">
           <div class="step-num">2</div>
@@ -693,7 +728,9 @@
     <div class="contact-box">
       <h2>¿Tienes preguntas?</h2>
       <p>Estamos aquí para ayudarte. Escríbenos y te responderemos pronto.</p>
-      <a href="/cdn-cgi/l/email-protection#7b1814150f1a180f143b091a0b121c1455181416" class="contact-btn">✉ Enviar mensaje</a>
+      <a href="mailto:oopsissora@gmail.com?subject=Consulta%20sobre%20servicios&body=Hola,%20me%20gustaría%20obtener%20más%20información." class="contact-btn">
+        ✉ Enviar mensaje
+      </a>
     </div>
   </section>
 
